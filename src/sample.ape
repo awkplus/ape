@@ -1,18 +1,22 @@
 # /* vim: set filetype=awk ts=2 sw=2 sts=2 expandtab: */
 @include "ape0"
 @include "meta"
+@include "list"
 
 # sample.ape 
 
 function sample(i,     most) {
-  i.most= either(most,256)  # keep up to 64 items
+  object(i)
+  i.most= either(most,256) # keep up to `most` number of items
   has(i,"all")             # i.all holds the kept value
   i.n=0
+  i.sorted=0
 }
 
-function SampleAdd(i,v,    
+function sampleAdd(i,v,    
                  added,len) {
   i.n++
+  i.sorted=1
   len=length(i.all)
   if (len < i.most) {  # the cache is not full, add something
     push(i.all,v)
@@ -23,4 +27,11 @@ function SampleAdd(i,v,
   }
   return added
 }
-√
+function sampleMedian(i,  m,n) {
+     n= i.sorted ? length(i.all) : asort(i.all)
+     i.sorted=1
+     m = int(n/2)
+     if (n % 2)
+       return i.all[m + 1]
+     return (i.all[m] + i.all[m+1])/2
+}
