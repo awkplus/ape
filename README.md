@@ -1,17 +1,6 @@
-# APE = Awk Plus Extensions
+<img src="etc/banner.png">
 
-                            .="=.  
-                          _/.-.-.\_     _  
-                         ( ( o o ) )    ))  
-                          |/  "  \|    //  
-          .-------.        \'---'/    //  
-         _|~~ ~~  |_       /`"""`\\  ((  
-       =(_|_______|_)=    / /_,_\ \\  \\  
-         |:::::::::|      \_\\_'__/ \  ))  
-         |:::::::[]|       /`  /`~\  |//  
-         |o=======.|      /   /    \  /  
-    jgs  `"""""""""`  ,--`,--'\/\    /  
-                       '-- "--'  '--'  
+# APE = Awk Plus Extensions
 
 APE is  pre-processor to awk that handles:
 
@@ -59,7 +48,7 @@ directory as your `*.ape code`. Then
 - `xxx.ape` = your code
 - `xxxok.ape` = test scripts for `xxx.ape`
 
-## DIRECTORIES
+### DIRECTORIES
 
 - `./` = where to find  `.ape` source files; 
 - `$Var` = where to store long-lived temoraries. Defaults to `$Src/var`;
