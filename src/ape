@@ -281,6 +281,12 @@ prep() { ##  # ensure all .ape files have .awk version
     fi
   done
 }
+push() {
+ git status; git commit -am "commit"; git push
+}
+pull() {
+ git pull
+}
 ###################################
 # get all the configs (if any)
 
