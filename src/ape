@@ -188,7 +188,7 @@ ape0() {
 	# structs
 	
 	function new(i)      { split("",i,"") }
-	function object(i)   { new(i); i.oid = ++OID }
+	function object(i)   { new(i); i["oid"] = ++OID }
 	
 	function has(lst,key,fun) {
 	  lst[key][SUBSEP]

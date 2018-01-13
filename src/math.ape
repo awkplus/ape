@@ -1,0 +1,7 @@
+# /* vim: set filetype=awk ts=2 sw=2 sts=2 expandtab: */
+@include "ape0"
+
+# math.ape 
+function lt(x,y) { return x < y }
+function gt(x,y) { return x > y }
+

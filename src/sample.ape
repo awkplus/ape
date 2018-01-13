@@ -1,0 +1,26 @@
+# /* vim: set filetype=awk ts=2 sw=2 sts=2 expandtab: */
+@include "ape0"
+@include "meta"
+
+# sample.ape 
+
+function sample(i,     most) {
+  i.most= either(most,256)  # keep up to 64 items
+  has(i,"all")             # i.all holds the kept value
+  i.n=0
+}
+
+function SampleAdd(i,v,    
+                 added,len) {
+  i.n++
+  len=length(i.all)
+  if (len < i.most) {  # the cache is not full, add something
+    push(i.all,v)
+    added=1
+  } else if (rand() < len/i.n) {  # else, sometimes, add "v"
+    i.all[ int(len*rand()) + 1 ] = v
+    added=1
+  }
+  return added
+}
+√
