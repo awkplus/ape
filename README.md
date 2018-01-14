@@ -6,10 +6,11 @@
 
 ## Usage
 
-   cd src
-   ./ape
+    cd src
+    chmod +x # only needed first time
+    ./ape
  
-Print the current command line options.
+This will print the current command line options.
 
 ## About
 
