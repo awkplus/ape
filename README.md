@@ -26,14 +26,21 @@ data types:
 
 ## INSTALLATION
 
-Download [`ape`](src/ape). Place in the same
+All you need is one file: [`ape`](src/ape). Place in the same
 directory as your `*.ape` files. Then
 
      chmod +x ape
 
 ## TESTING
 
-     ./ape ok apeok
+If you check out this repo, then 
+
+     cd src
+     ./ape ok 
+
+will print many lines, the last of which should say `:PERCENT 100`. e.g
+
+    # :PASSED 20 :FAILED 0 :PERCENT 100
 
 ## COMMANDS
 
