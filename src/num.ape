@@ -16,7 +16,7 @@ function NumNorm(i,x) {
   return (x - i.lo)/(i.hi - i.lo + 1e-32)
 }
 function NumAdd(i,x,          delta) {
-  if (SampleAdd(i.nums,x)) {
+  if (SomeAdd(i.nums,x)) {
     x    += 0
     i.n  += 1
     i.lo  = x < i.lo ? x : i.lo
