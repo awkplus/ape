@@ -222,11 +222,17 @@ prep() { ##  # ensure all .ape files have .awk version
     fi
   done
 }
+gitting() {
+  git config --global credential.helper cache
+  git config credential.helper 'cache --timeout=3600'
+}
 push() {
- git status; git commit -am "commit"; git push
+  gitting
+  git status; git commit -am "commit"; git push
 }
 pull() {
- git pull
+  gitting
+  git pull
 }
 ###################################
 # get all the configs (if any)
