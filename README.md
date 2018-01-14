@@ -18,6 +18,7 @@ APE is  pre-processor to awk that handles:
 
 - structs, with field accessed via a nested dot syntax;
 - auto initialization of nested structures
+     - utilizing Gawk 4.0's nestes lists, plus indirect function calls
 - unit tests
 - multi-line comments containing markdown
 - tests for for rogue locals
