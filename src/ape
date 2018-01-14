@@ -5,7 +5,7 @@
 # Where to store temporaries
 
 Here="$PWD"
-Var="$Here/var"
+Var="$Here/.var"
 
 Lib="$Var/lib"
 Doc="$Var/doc"
@@ -55,9 +55,25 @@ help() { ## # show options
 	   printf("  %-10s%-8s%s\n",$1,$3,$4)}'
 }
 ok() {
-  $0 run $1
+  if [ -z "$1" ]; then
+    for f in *ok.ape; do
+       ok $(basename "$f" "ok.ape")
+    done
+  else 
+    if [ ! -f "${1}ok.ape" ]; then
+	echo "#E> missing ${1}ok.ape"
+	return 1
+    fi
+    run ${1}ok | gawk '
+    BEGIN        { f = p = 0 }
+                 { print $0 }
+    $2=="PASSED" { p++ }
+    $2=="FAILED" { f++ }
+    END          { 
+      print "\n# :PASSED " p " :FAILED " f \
+	    " :PERCENT " int(101*p/(p+f+0.0001))}'
+  fi
 }
-
 twins() {
   stem=$1
   if [ ! -f "${stem}.ape" ]; then cat <<-EOF > "${stem}.ape"
@@ -209,7 +225,9 @@ run() { # runs a .ape file
   fi
 }
 zap() {
-  rm -rf $Here/var
+  if [ ! -d "$Var" ]; then
+    rm -rf $Var
+  fi
   rm $Here/ape0.ape
 }
 prep() { ##  # ensure all .ape files have .awk version

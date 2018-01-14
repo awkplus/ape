@@ -15,7 +15,7 @@ function Some(i,     most) {
 
 function SomeAdd(i,v,    added,len) {
   i.n++
-  i.sorted = 1
+  i.sorted = 0
   len = length(i.all)
   if (len < i.most) {  # the cache is not full, add something
     push(i.all,v)
