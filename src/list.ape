@@ -1,14 +1,21 @@
 # /* vim: set filetype=awk ts=2 sw=2 sts=2 expandtab: */
 @include "ape0"
+@include "math"
 @include "meta"
-@include "num"
+@include "string"
+@include "math"
 
 # list.ape 
 
-function push(i,v) { 
-  i[length(i) + 1] = v 
-}
+function push(i,v) { i[length(i) + 1] = v }
+function top(i)    { return i[ length(i) ] }
 
+function median(l,    m,n,l1) {
+  n = length(l)
+  m = int(n/2)
+  l1 = l[m+1]
+  return (n % 2) ? l1 : (l[m] + l1)/2
+}
 function bsearch(lst,x,approx,lt,gt,
                  lo,mid,hi,val) {
   lo = 1
@@ -24,5 +31,30 @@ function bsearch(lst,x,approx,lt,gt,
   }
   return approx ? mid : error("bsearch: ["x"] not found")
 }
+function o(l,prefix,order,
+           indent,
+           old,i) {
+  old = PROCINFO["sorted_in"]
+  prefix=either(prefix,"o ")
+  if(! isarray(l)) {
+    print "not array",prefix,l
+    return 0}
+  if(!order)
+    for(i in l) {
+      if (isnum(i))
+        order = "@ind_num_asc"
+      else
+        order = "@ind_str_asc"
+      break
+    }
+   PROCINFO["sorted_in"]= order
+   for(i in l)
+     if (isarray(l[i])) {
+       print prefix  indent "[" i "]"
+       o(l[i],prefix,order, indent ":   ")
+     } else
+       print prefix  indent "[" i"]  = (" l[i] ")"
+   PROCINFO["sorted_in"]  = old
+}
 
-~
+

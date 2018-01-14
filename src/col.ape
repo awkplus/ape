@@ -3,8 +3,8 @@
 
 # col.aok 
 
-function col(i,pos,txt) {
-   object(i)
+function Col(i,pos,txt) {
+   Object(i)
    i.txt = txt
    i.pos = pos="" ? 1 : pos
 }

@@ -3,4 +3,8 @@
 
 # meta.ape 
 
-function either(x,y) { return x=="" ? y : x }
+function either(x,y) { 
+  return x=="" ? y : x }
+
+function isnum(x) {
+  return x=="" ? 0 : x == (0+strtonum(x)) }

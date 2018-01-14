@@ -5,18 +5,18 @@
 @include "col" 
 @include "sample" 
 
-function num(i) {
-  col(i)
-  has(i,"nums","sample")
+function Num(i) {
+  Col(i)
+  has(i,"nums","Sample")
   i.hi  = -1e32
   i.lo  =  1e32
   i.n   = i.mu = i.m2 = i.sd = 0
 }
-function numNorm(i,x) {
+function NumNorm(i,x) {
   return (x - i.lo)/(i.hi - i.lo + 1e-32)
 }
-function numAdd(i,x,          delta) {
-  if sampleAdd(i.nums,x) {
+function NumAdd(i,x,          delta) {
+  if (SampleAdd(i.nums,x)) {
     x    += 0
     i.n  += 1
     i.lo  = x < i.lo ? x : i.lo

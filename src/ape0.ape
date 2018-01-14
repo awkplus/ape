@@ -4,7 +4,7 @@
 # structs
 
 function new(i)      { split("",i,"") }
-function object(i)   { new(i); i["oid"] = ++OID }
+function Object(i)   { new(i); i["oid"] = ++OID }
 
 function has(lst,key,fun) {
   lst[key][SUBSEP]
@@ -25,9 +25,10 @@ has(lst,key); @fun(lst[key],a,b,c,d,e) }
 # ---------------------------------------
 # tests
 
-function tests(all,   one,a,i,n) {
+function tests(what, all,   one,a,i,n) {
    n = split(all,a,",")
    print " "
+   print "#--- " what " -----------------------"
    for(i=1;i<=n;i++) {
      one = a[i]
      @one(one)
