@@ -6,4 +6,4 @@
 - write some apps
     - naive bayes
     - fft trees
-
+- md generation
