@@ -4,6 +4,15 @@
 
 # APE = Awk Plus Extensions
 
+## Usage
+
+   cd src
+   ./ape
+ 
+Print the current command line options.
+
+## About
+
 APE is  pre-processor to awk that handles:
 
 - structs, with field accessed via a nested dot syntax;
