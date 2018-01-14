@@ -3,11 +3,11 @@
 # num : numbers
 
 @include "col" 
-@include "sample" 
+@include "some" 
 
 function Num(i) {
   Col(i)
-  has(i,"nums","Sample")
+  has(i,"nums","Some")
   i.hi  = -1e32
   i.lo  =  1e32
   i.n   = i.mu = i.m2 = i.sd = 0

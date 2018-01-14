@@ -3,9 +3,9 @@
 @include "meta"
 @include "list"
 
-# sample.ape 
+# some.ape 
 
-function Sample(i,     most) {
+function Some(i,     most) {
   Object(i)
   i.most= either(most,256) # keep up to `most` number of items
   has(i,"all")             # i.all holds the kept value
@@ -13,7 +13,7 @@ function Sample(i,     most) {
   i.sorted=0
 }
 
-function SampleAdd(i,v,    added,len) {
+function SomeAdd(i,v,    added,len) {
   i.n++
   i.sorted = 1
   len = length(i.all)
@@ -26,7 +26,7 @@ function SampleAdd(i,v,    added,len) {
   }
   return added
 }
-function SampleMedian(i,  m,n) {
+function SomeMedian(i,  m,n) {
   n= i.sorted ? length(i.all) : asort(i.all)
   i.sorted=1
   return median(i.all)

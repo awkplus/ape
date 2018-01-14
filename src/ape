@@ -221,7 +221,7 @@ prep() { ##  # ensure all .ape files have .awk version
       cat "$i" | _ape2awk > "$j"
     fi
   done
-}
+} 
 gitting() {
   git config --global credential.helper cache
   git config credential.helper 'cache --timeout=3600'
