@@ -24,29 +24,19 @@ Vim="/usr/local/bin/vim"
 x=au
 
 banner() { cat<<'EOF'
-         ||    
-         ||    
-        _;|    
-       /__3    
-      / /||    
-     / / // .--.    
-     \ \// / (OO)    
-      \//  |( _ )    
-      // \__/`-'\__    
-     // \__      _ \    
- _.-'/    | ._._.|\ \    
-(_.-'     |      \ \ \    
-   .-._   /    o ) / /    
-  /_ \ \ /   \__/ / /    
-    \ \_/   / /  E_/    
-     \     / /    
-      `-._/-' :F_P:    
-    
+   _oOoOoOo_
+  (oOoOoOoOo)
+   )`"""""`(
+  /         \ 
+ |  G O L D  |
+ \           / 
+  `=========` 
+
 EOF
 }
 help() { ## # Show options.
   banner
-  printf "Gold object layer v0.2\n"
+  printf "Gawk object layer v0.2\n"
   printf "(c) 2018, tim@menzies.us, BSD (2-clause)"
   printf "\n\noptions:\n"
   grep '{ ##' $0  | sort | $Awk '
