@@ -21,6 +21,7 @@ Vim="/usr/local/bin/vim"
 
 # end config
 #---------------------------------
+x=au
 
 banner() { cat<<'EOF'
          ||    
@@ -45,7 +46,7 @@ EOF
 }
 help() { ## # Show options.
   banner
-  printf "APE v0.2\n"
+  printf "Gold object layer v0.2\n"
   printf "(c) 2018, tim@menzies.us, BSD (2-clause)"
   printf "\n\noptions:\n"
   grep '{ ##' $0  | sort | $Awk '
@@ -66,29 +67,29 @@ _passfail() {
 }
 ok() { ## [STEM] # Run one file. If no arg, then run all.
   if [ -z "$1" ]; then
-    for f in *ok.ape; do
-	    run $(basename "$f" ".ape")
+    for f in *ok.$x; do
+	    run $(basename "$f" ".$x")
     done | _passfail
   else 
-    if [ ! -f "${1}ok.ape" ]; then
-	echo "#E> missing ${1}ok.ape"
+    if [ ! -f "${1}ok.$x" ]; then
+	echo "#E> missing ${1}ok.$x"
 	return 1
     fi
     run ${1}ok | _passfail
   fi  
 }
-twins() { ## STEM # Generate STEM.ape and STEMok.ape.
+twins() { ## STEM # Generate STEM.au and STEMok.au.
   stem=$1
-  if [ ! -f "${stem}.ape" ]; then cat <<-EOF > "${stem}.ape"
+  if [ ! -f "${stem}.$x" ]; then cat <<-EOF > "${stem}.$x"
 	$FileHeader
-	@include "ape0"
+	@include "${x}0"
 	
-	# ${stem}.ape 
+	# ${stem}.$x 
 
 	EOF
-	echo "# Made ${stem}.ape"
+	echo "# Made ${stem}.$x"
   fi
-  if [ ! -f "${stem}ok.ape" ]; then cat <<-EOF > "${stem}ok.ape"
+  if [ ! -f "${stem}ok.$x" ]; then cat <<-EOF > "${stem}ok.$x"
 	$FileHeader
 	@include "${stem}"
 
@@ -100,10 +101,10 @@ twins() { ## STEM # Generate STEM.ape and STEMok.ape.
 	   tests("$stem", "_test1")
 	}
 	EOF
-	echo "# Made ${stem}ok.ape"
+	echo "# Made ${stem}ok.$x"
   fi
 }
-_ape2awk() {
+_2awk() {
   $Awk '
 BEGIN {In=1}
 
@@ -128,15 +129,15 @@ gitignore() { ## # Add a gitignore statement
 	Session.vim
 	.netrwhist
 	*~
-	# ape stuff
+	# my stuff
 	awkprof.out
 	awkvars.out
 	var
 	EOF
   fi
 }
-_ape0() { 
-  if [ ! -f "ape0.ape" ]; then cat<<-'EOF'> ape0.ape
+_0() { 
+    if [ ! -f "${x}0.$x" ]; then cat<<-'EOF'> ${x}0.$x
 	# /* vim: set filetype=awk ts=2 sw=2 sts=2 expandtab: */
 	
 	# ----------------------------------------
@@ -183,7 +184,7 @@ _ape0() {
 	EOF
   fi
 }
-ed() { ## FILE # Edit a .ape file
+ed() { ## FILE # Edit a .au file
    cat<<-EOF> $Tmp/vimrc 
 	set backupdir-=.
 	set backupdir^=~/tmp,/tmp
@@ -214,7 +215,7 @@ ed() { ## FILE # Edit a .ape file
 	EOF
   $Vim -u "$Tmp/vimrc" $*
 }
-run() { ## STEM # Run STEM.ape file
+run() { ## STEM # Run STEM.au file
   prep
   file=$1
   Built="$Lib/$file.awk"
@@ -231,15 +232,15 @@ zap() { ## # Kill all temps, reset system (dangerous)
   if [  -d "$Var" ]; then
     rm -rf "$Var"
   fi
-  rm $Here/ape0.ape
+  rm $Here/${x}0.$x
 }
-prep() { ##  # Ensure all .ape files have .awk version
-  for i in *.ape; do
-    stem=$(basename "$i" ".ape")
-    j="$Lib/${stem}.awk"
+prep() { ##  # Ensure all .au files have .awk version
+  for i in *.$x; do
+    stem=$(basename "$i" ".$x")
+    j="$Lib/${stem}.$x"
     if [ "$i" -nt "$j" ]; then
       echo "# $i ==> $j"
-      cat "$i" | _ape2awk > "$j"
+      cat "$i" | _2awk > "$j"
     fi
   done
 } 
@@ -261,9 +262,9 @@ pull() { ## # Pull from Github
 for dir in "$Var" "$Lib" "$Doc" "$Tmp"; do
   mkdir -p "$dir"; done
 
-_ape0
+_0
 
-if [ -f "${1}.ape" ]; then
+if [ -f "${1}.$x" ]; then
         run "$@"
 elif [ `type -t $1`"" == 'function' ]; then
         f=$1
